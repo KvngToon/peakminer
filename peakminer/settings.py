@@ -135,9 +135,9 @@ LOGIN_URL = "login"
 # # settings.py
 
 # CSRF_TRUSTED_ORIGINS = ["https://www.peakminersfx.com", "https://peakminersfx.com"]
-CSRF_TRUSTED_ORIGINS = ["https://www.peakminersfx.com"]
+CSRF_TRUSTED_ORIGINS = ["https://www.peakminersfx.com", "https://peakminersfx.com"]
 
-CSRF_COOKIE_DOMAIN = ".peakmineresfx.com"  # Note the dot before the domain
+CSRF_COOKIE_DOMAIN = "https://www.peakmineresfx.com"  # Note the dot before the domain
 # CSRF_COOKIE_PATH = "/"
 
 # CSRF_COOKIE_SECURE = True
