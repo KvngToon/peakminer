@@ -144,3 +144,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "core.user"
 
 LOGIN_URL = "login"
+
+# settings.py
+
+CSRF_TRUSTED_ORIGINS = ["https://www.peakminers.com", "https://peakminers.com"]
