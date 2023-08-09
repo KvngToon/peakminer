@@ -132,17 +132,17 @@ AUTH_USER_MODEL = "core.user"
 
 LOGIN_URL = "login"
 
-# settings.py
+# # settings.py
 
-CSRF_TRUSTED_ORIGINS = ["https://www.peakminersfx.com", "https://peakminersfx.com"]
+# CSRF_TRUSTED_ORIGINS = ["https://www.peakminersfx.com", "https://peakminersfx.com"]
 
-# settings.py
+# # settings.py
 
-CSRF_COOKIE_DOMAIN = ".peakmineresfx.com"  # Note the dot before the domain
-CSRF_COOKIE_PATH = "/"
+# CSRF_COOKIE_DOMAIN = ".peakmineresfx.com"  # Note the dot before the domain
+# CSRF_COOKIE_PATH = "/"
 
-# settings.py
+# # settings.py
 
-CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_HTTPONLY = True
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTOCOL", "https")
+# CSRF_COOKIE_SECURE = True
+# CSRF_COOKIE_HTTPONLY = True
+# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTOCOL", "https")
