@@ -55,7 +55,7 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    # "django.middleware.csrf.CsrfViewMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -135,13 +135,10 @@ LOGIN_URL = "login"
 # # settings.py
 
 # CSRF_TRUSTED_ORIGINS = ["https://www.peakminersfx.com", "https://peakminersfx.com"]
+CSRF_TRUSTED_ORIGINS = ["https://www.peakminersfx.com"]
 
-# # settings.py
-
-# CSRF_COOKIE_DOMAIN = ".peakmineresfx.com"  # Note the dot before the domain
+CSRF_COOKIE_DOMAIN = ".peakmineresfx.com"  # Note the dot before the domain
 # CSRF_COOKIE_PATH = "/"
-
-# # settings.py
 
 # CSRF_COOKIE_SECURE = True
 # CSRF_COOKIE_HTTPONLY = True
