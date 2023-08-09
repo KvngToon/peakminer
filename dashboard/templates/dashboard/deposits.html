@@ -1,0 +1,197 @@
+{%extends 'dashboard/base.html'%} {%load static%} {%block content%}
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <div class="mb-4">
+            <h6>Make a Deposit</h6>
+            <small
+              >make deposit to the wallet below to invest then create an
+              investment request</small
+            >
+          </div>
+          {%for wallet in payments%}
+          <div class="row">
+            <div class="col-lg-4 col-md-4">
+              <small>Payment Type</small>
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  value="{{wallet.payment_type}}"
+                  aria-label="Payment Type"
+                  aria-describedby="paymentType"
+                  disabled
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4">
+              <small>Wallet Address</small>
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="walletAddress"
+                  value="{{wallet.wallet_address}}"
+                  aria-label="Wallet Address"
+                  aria-describedby="wallet address"
+                />
+                <button
+                  class="btn btn-outline-primary mb-0"
+                  type="button"
+                  id="button-addon2"
+                  onclick="copyFunction()"
+                >
+                  Copy
+                </button>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+              <small>Network Type</small>
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  value="{{wallet.network_type}}"
+                  disabled
+                />
+              </div>
+            </div>
+          </div>
+          {%endfor%}
+        </div>
+        <div class="card-body px-4 pt-0 pb-2">
+          <h6>Deposit Approval Request</h6>
+          <form method="post">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-4">
+                <div class="input-group mb-3">
+                  <button
+                    class="btn btn-icon btn-3 btn-primary mb-0"
+                    type="button"
+                    id="button-addon1"
+                  >
+                    <i class="fa-solid fa-dollar-sign"></i>
+                  </button>
+                  {{ form.amount }}
+                </div>
+              </div>
+              <div class="col-md-4">{{ form.investment_plan }}</div>
+              <div class="col-md-4">
+                <button class="btn btn-icon btn-3 btn-primary" type="submit">
+                  <span class="btn-inner--icon"
+                    ><i class="fa fa-check-to-slot"></i
+                  ></span>
+                  <span class="btn-inner--text">Request</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6>Deposits</h6>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                  >
+                    Amount
+                  </th>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                  >
+                    Investment
+                  </th>
+                  <th
+                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                  >
+                    Status
+                  </th>
+                  <th
+                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                  >
+                    Date
+                  </th>
+                  <th class="text-secondary opacity-7"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for d in deposit%}
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="px-2">
+                        <i class="fa-solid fa-receipt"></i>
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">${{d.amount}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">
+                      {{d.investment_plan.name}}
+                    </p>
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                    <span class="badge badge-sm  {%if d.status == "Pending"%}bg-gradient-warning{%elif d.status == "Rejected"%}bg-gradient-danger{%else%}bg-gradient-success{%endif%}"
+                      >{{d.status}}</span
+                    >
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="text-secondary text-xs font-weight-bold"
+                      >{{d.created_at}}</span
+                    >
+                  </td>
+                </tr>
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%endblock%} {%block script%}
+  <script>
+    // Function to prevent typing in the input field
+    function preventTyping(event) {
+      event.preventDefault();
+    }
+
+    // Attach the event listener to the input field
+    var inputField = document.getElementById("walletAddress");
+    inputField.addEventListener("keydown", preventTyping);
+
+    function copyFunction() {
+      /* Get the text field */
+      var copyText = document.getElementById("walletAddress");
+
+      /* Select the text field */
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+      /* Copy the text inside the text field */
+      document.execCommand("copy");
+
+      /* Alert the copied text */
+      alert("Copied the wallet: " + copyText.value);
+    }
+  </script>
+  {%endblock%}
+</div>

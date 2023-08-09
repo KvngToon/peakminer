@@ -1,0 +1,94 @@
+{% extends 'core/base.html' %} {%load static%} 
+{%block page%}
+  <body class="register-page">
+    {%endblock%}
+  
+  {% block content %}
+  
+<div class="page-header">
+  <div class="page-header-image"></div>
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 col-md-6 offset-lg-0 offset-md-3">
+          
+          <div id="square7" class="square square-7"></div>
+          <div id="square8" class="square square-8"></div>
+          
+          <div class="card card-register">
+            
+            <div class="card-header">
+              <img
+                class="card-img"
+                src="{% static 'img/square1.png'%}"
+                alt="Card image"
+              />
+              <h4 class="card-title text-white ml-3">Login</h4>
+            </div>
+            <div class="card-body">
+              {% if form.non_field_errors %}
+        <div class="alert alert-primary alert-with-icon">
+          <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="tim-icons icon-simple-remove"></i>
+          </button>
+          <span data-notify="icon" class="tim-icons icon-alert-circle-exc"></span>
+          <span>
+            <p>Please enter a correct username and password or click <a class="text-white" href="{%url 'signup'%}">Forgot Password</a></p>
+          </span>
+        </div>
+        {% endif %}
+              <!-- form starts -->
+              <form class="form" method="post">
+                {% csrf_token %}
+                
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="tim-icons icon-single-02"></i>
+                    </div>
+                  </div>
+                  {{ form.username }}
+                </div>
+                {% if form.username.errors %}
+                <div class="alert alert-danger">{{ form.username.errors }}</div>
+                {% endif %}
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="tim-icons icon-lock-circle"></i>
+                    </div>
+                  </div>
+                  {{ form.password }}
+                </div>
+                {% if form.password.errors %}
+                <div class="alert alert-danger">{{ form.password.errors }}</div>
+                {% endif %}
+                <p class="mt-4">
+                  If you dont have an account <a href="{%url 'signup'%}">Sign Up</a>
+                </p>
+
+                <p><a href="#">Forgot Password</a></p>
+
+                
+
+              <!-- form ends -->
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-info btn-round btn-lg">Login</button>
+            </div>
+          </form>
+
+          </div>
+        </div>
+      </div>
+      <div class="register-bg"></div>
+      <div id="square1" class="square square-1"></div>
+      <div id="square2" class="square square-2"></div>
+      <div id="square3" class="square square-3"></div>
+      <div id="square4" class="square square-4"></div>
+      <div id="square5" class="square square-5"></div>
+      <div id="square6" class="square square-6"></div>
+    </div>
+  </div>
+</div>
+{%endblock%}

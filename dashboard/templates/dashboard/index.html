@@ -1,0 +1,318 @@
+{%extends 'dashboard/base.html'%} {%load static%} {%block content%}
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                  Total Balance
+                </p>
+                <h5 class="font-weight-bolder">${{user.balance}}</h5>
+                {% comment %}
+                <p class="mb-0">
+                  <span class="text-success text-sm font-weight-bolder"
+                    >+55%</span
+                  >
+                  since yesterday
+                </p>
+                {% endcomment %}
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <a href="{%url 'deposits'%}">
+                <div
+                  class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle"
+                >
+                  <i
+                    class="fa-solid fa-wallet fa-lg opacity-10"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                  Withdrawals
+                </p>
+                <h5 class="font-weight-bolder">
+                  ${%if withdrawals_total is None%} 0 {%else%}
+                  {{withdrawals_total}} {%endif%}
+                </h5>
+                {% comment %}
+                <p class="mb-0">
+                  <span class="text-success text-sm font-weight-bolder"
+                    >+3%</span
+                  >
+                  since last week
+                </p>
+                {% endcomment %}
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <a href="{%url 'withdrawal'%}">
+                <div
+                  class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle"
+                >
+                  <i
+                    class="fa-solid fa-hand-holding-dollar fa-lg opacity-10"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                  Deposits
+                </p>
+                <h5 class="font-weight-bolder">
+                  $ {%if deposit_total is None%} 0 {%else%} {{deposit_total}}
+                  {%endif%}
+                </h5>
+                {% comment %}
+                <p class="mb-0">
+                  <span class="text-danger text-sm font-weight-bolder"
+                    >-2%</span
+                  >
+                  since last quarter
+                </p>
+                {% endcomment %}
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <a href="{%url 'deposits'%}">
+                <div
+                  class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle"
+                >
+                  <i
+                    class="fa-solid fa-money-bill-transfer opacity-10"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6">
+      <div class="card">
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm mb-0 text-uppercase font-weight-bold">
+                  Investments
+                </p>
+                <h5 class="font-weight-bolder">{{investments_count}}</h5>
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div
+                class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle"
+              >
+                <a href="{%url 'investments'%}">
+                  <i
+                    class="fa-solid fa-chart-line fa-lg"
+                    aria-hidden="true"
+                  ></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-lg-7 mb-lg-0 mb-4">
+      <div class="card z-index-2 h-100">
+        <div class="card-header pb-0 pt-3 bg-transparent">
+          <h6 class="text-capitalize">Mine Status</h6>
+          <p class="text-sm mb-0">
+            <i class="fa fa-arrow-up text-success"></i>
+            <span class="font-weight-bold">Overall Uptime: 99%</span> in 2023
+          </p>
+        </div>
+        <div class="card-body p-3">
+          <div class="chart">
+            <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="card card-carousel overflow-hidden h-100 p-0">
+        <div class="card-header pb-0 pt-3 bg-transparent">
+          <h6 class="text-capitalize">Get up to speed</h6>
+          <p class="text-sm mb-0">
+            with the <span class="font-weight-bold">latest</span> latest trends
+            in 2023
+          </p>
+        </div>
+        <div class="card-body">
+          <div class="btcwdgt-chart" bw-cash="false" bw-noshadow="true"></div>
+          <script>
+            (function (b, i, t, C, O, I, N) {
+              window.addEventListener(
+                "load",
+                function () {
+                  if (b.getElementById(C)) return;
+                  (I = b.createElement(i)), (N = b.getElementsByTagName(i)[0]);
+                  I.src = t;
+                  I.id = C;
+                  N.parentNode.insertBefore(I, N);
+                },
+                false
+              );
+            })(
+              document,
+              "script",
+              "https://widgets.bitcoin.com/widget.js",
+              "btcwdgt"
+            );
+          </script>
+          {% comment %}
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script
+              type="text/javascript"
+              src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js"
+              async
+            >
+                {
+                "feedMode": "all_symbols",
+                "colorTheme": "light",
+                "isTransparent": false,
+                "displayMode": "compact",
+                "width": "100%",
+                "height": "100%",
+                "locale": "en"
+              }
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+          {% endcomment %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-lg-7 mb-lg-0 mb-4">
+      <div class="card">
+        <div class="card-header pb-0 p-3">
+          <div class="d-flex justify-content-between">
+            <h6 class="mb-2">Withdrawals</h6>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center">
+            <tbody>
+              {%for w in withdrawals%}
+              <tr>
+                <td class="w-30">
+                  <div class="d-flex px-2 py-1 align-items-center">
+                    {% comment %}
+                    <div>
+                      <img
+                        src="{%static 'img/icons/flags/US.png'%}"
+                        alt="Country flag"
+                      />
+                    </div>
+                    {% endcomment %}
+                    <div class="ms-4">
+                      <p class="text-xs font-weight-bold mb-0">id</p>
+                      <h6 class="text-sm mb-0">{{w.id}}</h6>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="text-center">
+                    <p class="text-xs font-weight-bold mb-0">Amount:</p>
+                    <h6 class="text-sm mb-0">{{w.amount}}</h6>
+                  </div>
+                </td>
+                <td>
+                  <div class="text-center">
+                    <p class="text-xs font-weight-bold mb-0">Status:</p>
+                    <h6 class="text-sm mb-0">{{w.status}}</h6>
+                  </div>
+                </td>
+                <td class="align-middle text-sm">
+                  <div class="col text-center">
+                    <p class="text-xs font-weight-bold mb-0">Time:</p>
+                    <h6 class="text-sm mb-0">{{w.created_at|time}}</h6>
+                  </div>
+                </td>
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="card">
+        <div class="card-header pb-0 p-3">
+          <h6 class="mb-0">Investments</h6>
+        </div>
+        <div class="card-body p-3">
+          <ul class="list-group">
+            {%for i in investments%}
+            <li
+              class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg"
+            >
+              <div class="d-flex align-items-center">
+                <div
+                  class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center"
+                >
+                  <i class="ni ni-mobile-button text-white opacity-10"></i>
+                </div>
+                <div class="d-flex flex-column">
+                  <h6 class="mb-1 text-dark text-sm">{{i.name}}</h6>
+                  <span class="text-xs"
+                    >Rate:
+                    <span class="font-weight-bold">{{i.interest_rate}}x</span>,
+                    min:<span class="font-weight-bold">
+                      ${{i.minimum_deposit}}</span
+                    ></span
+                  >
+                </div>
+              </div>
+              <div class="d-flex">
+                <button
+                  class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"
+                >
+                  <i class="ni ni-bold-right" aria-hidden="true"></i>
+                </button>
+              </div>
+            </li>
+            {%endfor%}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  {%endblock%}
+</div>

@@ -1,0 +1,76 @@
+{% extends 'core/base.html' %} {%load static%} {% block content %}
+
+<div class="page-header">
+  <img src="{% static 'img/blob.png' %}" class="path" />
+  <img src="{% static 'img/path2.png' %}" class="path2" />
+  <img src="{% static 'img/triunghiuri.png' %}" class="shapes triangle" />
+  <img src="{% static 'img/waves.png' %}" class="shapes wave" />
+  <img src="{% static 'img/patrat.png' %}" class="shapes squares" />
+  <img src="{% static 'img/cercuri.png' %}" class="shapes circle" />
+  <div class="content-center">
+    <div
+      class="row row-grid justify-content-between align-items-center text-left"
+    >
+      <div class="col-lg-6 col-md-6">
+        <h1 class="text-white">Contact Us</h1>
+        <span class="text-white"> <i>Were Here to Help</i> </span>
+
+        <p class="text-white mb-3">
+          Have questions or need assistance? Our dedicated support team is
+          available 24/7 to address any queries or concerns. Contact us via
+          email, phone, or live chat, and we'll be more than happy to assist
+          you.
+          <br />
+          Join us at Peak Miners FTX, and together, let's uncover the potential
+          of cryptocurrencies through the art of mining! (Note: Ensure you
+          comply with any legal and regulatory requirements related to
+          cryptocurrency mining in your jurisdiction.)
+        </p>
+        <div class="btn-wrapper mb-3">
+          <p class="category text-success d-inline">earn above 10%/mo</p>
+          <a href="#get-started" class="btn btn-success btn-link btn-sm"
+            ><i class="tim-icons icon-minimal-right"></i
+          ></a>
+          <!-- Link to Get Started -->
+        </div>
+        <!-- <div class="btn-wrapper"> -->
+        <div class="button-container">
+          <button
+            href="javascript:void(0)"
+            class="btn btn-icon btn-simple btn-round btn-neutral"
+          >
+            <i class="fab fa-whatsapp"></i>
+          </button>
+          08123456789
+
+          <br />
+          <button
+            href="javascript:void(0)"
+            class="btn btn-icon btn-simple btn-round btn-neutral"
+          >
+            <i class="tim-icons icon-email-85"></i>
+          </button>
+          support@peakminersfx.com
+
+          <br />
+          <button
+            href="javascript:void(0)"
+            class="btn btn-icon btn-simple btn-round btn-neutral"
+          >
+            <i class="fab fa-facebook"></i>
+          </button>
+          support@peakminersfx.com
+        </div>
+        <!-- </div> -->
+      </div>
+      <div class="col-lg-4 col-md-5">
+        <img
+          src="{% static 'img/contact.png'%}"
+          alt="Circle image"
+          class="img-fluid"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}

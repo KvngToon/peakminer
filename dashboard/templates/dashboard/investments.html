@@ -1,0 +1,105 @@
+{%extends 'dashboard/base.html'%} {%load static%} {%block content%}
+<div class="container-fluid py-4">
+  
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6>All Investments</h6>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center justify-content-center mb-0">
+              <thead>
+                <tr>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                  >
+                    Package
+                  </th>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                  >
+                    Deposit
+                  </th>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                  >
+                    Status
+                  </th>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2"
+                  >
+                    Completion
+                  </th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for d in deposit%}
+                <tr>
+                  <td>
+                    <div class="d-flex px-2">
+                      <div class="mx-2">
+                        {%if d.status == "Pending" or d.status == "Rejected"%}
+                        <i
+                          class="fa-solid fa-arrows-spin fa-lg"
+                          style="color: #ed500c"
+                        ></i>
+                        {%else%}
+                        <i
+                          class="fa-solid fa-arrows-spin fa-spin fa-lg"
+                          style="color: #0c5fed"
+                        ></i>
+                        {%endif%}
+                      </div>
+                      <div class="my-auto">
+                        <h6 class="mb-0 text-sm">{{d.investment_plan.name}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="text-sm font-weight-bold mb-0">${{d.amount}}</p>
+                  </td>
+                  <td>
+                    <span 
+                    class="text-xs font-weight-bold"
+                    {%if d.status == "Pending" or d.status == "Rejected"%}
+                    style="color: #ed500c"
+                    {%else%}
+                    style="color: #0c5fed"
+                    {%endif%}
+                    >{{d.status}}</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    <div
+                      class="d-flex align-items-center justify-content-center"
+                    >
+                      <span class="me-2 text-xs font-weight-bold"
+                        >{{d.completion_percentage}}%</span
+                      >
+                      <div>
+                        <div class="progress">
+                          <div
+                            class="progress-bar  {%if d.status == "Pending" or d.status == "Rejected"%}bg-gradient-danger{%else%}bg-gradient-info{%endif%}"
+                            role="progressbar"
+                            aria-valuenow="{{d.completion_percentage}}"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            style="width: {{d.completion_percentage}}%"
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}

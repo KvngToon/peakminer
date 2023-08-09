@@ -1,0 +1,167 @@
+{%extends 'dashboard/base.html'%} {%load static%} {%block content%}
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <div class="mb-4">
+            {%if error_message%}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+      <span class="alert-text text-white"><strong>{{error_message}}</strong></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+    {%endif%}
+            <h6>Request Withdrawal</h6>
+            <small
+              >Click to Request Cashout</small
+            >
+          </div>
+          
+        </div>
+        <div class="card-body px-4 pt-0 pb-2">
+          <h6>Withdrawal Approval Request</h6>
+          <form method="post">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-3">
+                <div class="input-group mb-3">
+                  <button
+                    class="btn btn-icon btn-3 btn-primary mb-0"
+                    type="button"
+                    id="button-addon1"
+                  >
+                    <i class="fa-solid fa-dollar-sign"></i>
+                  </button>
+                  {{ form.amount }}
+                </div>
+              </div>
+              <div class="col-md-3">{{ form.wallet }}</div>
+              <div class="col-md-3">{{ form.crypto_network }}</div>
+              <div class="col-md-3">
+                <button class="btn btn-icon btn-3 btn-primary" type="submit">
+                  <span class="btn-inner--icon"
+                    ><i class="fa fa-check-to-slot"></i
+                  ></span>
+                  <span class="btn-inner--text">Request</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header pb-0">
+          <h6>Deposits</h6>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                  >
+                    Amount
+                  </th>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                  >
+                  Wallet
+                  </th>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                  >
+                  Crypto Network
+                  </th>
+                  <th
+                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                  >
+                    Status
+                  </th>
+                  <th
+                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                  >
+                    Date
+                  </th>
+                  <th class="text-secondary opacity-7"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for w in withdrawals%}
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="px-2">
+                        <i class="fa-solid fa-receipt"></i>
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm">${{w.amount}}</h6>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">
+                      {{w.wallet}}
+                    </p>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">
+                      {{w.crypto_network}}
+                    </p>
+                  </td>
+                  <td class="align-middle text-center text-sm">
+                    <span class="badge badge-sm  {%if w.status == "Pending"%}bg-gradient-warning{%elif w.status == "Rejected"%}bg-gradient-danger{%else%}bg-gradient-success{%endif%}"
+                      >{{w.status}}</span
+                    >
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="text-secondary text-xs font-weight-bold"
+                      >{{w.created_at}}</span
+                    >
+                  </td>
+                </tr>
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%endblock%} {%block script%}
+  <script>
+    // Function to prevent typing in the input field
+    function preventTyping(event) {
+      event.preventDefault();
+    }
+
+    // Attach the event listener to the input field
+    var inputField = document.getElementById("walletAddress");
+    inputField.addEventListener("keydown", preventTyping);
+
+    function copyFunction() {
+      /* Get the text field */
+      var copyText = document.getElementById("walletAddress");
+
+      /* Select the text field */
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+      /* Copy the text inside the text field */
+      document.execCommand("copy");
+
+      /* Alert the copied text */
+      alert("Copied the wallet: " + copyText.value);
+    }
+  </script>
+  {%endblock%}
+</div>
