@@ -147,6 +147,6 @@ LOGIN_URL = "login"
 
 # settings.py
 
-CSRF_TRUSTED_ORIGINS = ["https://www.peakminers.com", "https://peakminers.com"]
+CSRF_TRUSTED_ORIGINS = ["https://www.peakminersfx.com", "https://peakminersfx.com"]
 
-CSRF_COOKIE_DOMAIN = "https://www.peakminers.com"
+CSRF_COOKIE_DOMAIN = "https://www.peakminersfx.com"
