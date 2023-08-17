@@ -23,4 +23,4 @@ urlpatterns = [
     path("", include("core.urls")),
     path("dashboard/", include("dashboard.urls")),
 ]
-# urlpatterns += staticfiles_urlpatterns()
+urlpatterns += staticfiles_urlpatterns()
