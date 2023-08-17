@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure-5ybqfw*thq_&as84hm&5s$&=$b#q2!hxk-0$bl8$932lt&$0@*
 DATABASE_URL = config("DATABASE_URL")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
