@@ -135,8 +135,8 @@ LOGIN_URL = "login"
 
 # settings.py
 CORS_ALLOWED_ORIGINS = [
-    "https://read-only.example.com",
-    "https://read-and-write.example.com",
+    "https://www.peakminersfx.com",
+    "https://peakminersfx.com",
 ]
 
 # CSRF_TRUSTED_ORIGINS = ["https://www.peakminersfx.com", "https://peakminersfx.com"]
