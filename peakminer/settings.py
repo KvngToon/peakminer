@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure-5ybqfw*thq_&as84hm&5s$&=$b#q2!hxk-0$bl8$932lt&$0@*
 DATABASE_URL = config("DATABASE_URL")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "peakminer-production.up.railway.app",
@@ -149,6 +149,16 @@ CSRF_TRUSTED_ORIGINS = ["https://www.peakminersfx.com", "https://peakminersfx.co
 # CSRF_COOKIE_DOMAIN = "https://www.peakminersfx.com"  # Note the dot before the domain
 # # CSRF_COOKIE_PATH = "/"
 
-# CSRF_COOKIE_SECURE = True
+# HTTPS SETTINGS
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+
+# HSTS SETTINGS
+SECURE_HSTS_SECONDS = 3153600
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+
 # CSRF_COOKIE_HTTPONLY = True
 # SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTOCOL", "https")
