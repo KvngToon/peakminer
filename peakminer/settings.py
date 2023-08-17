@@ -30,7 +30,7 @@ SECRET_KEY = "e3bc425af1a8cb66002b8e99ec962830ace89e4eda3221ae4234a2167f3860d9d1
 DATABASE_URL = config("DATABASE_URL")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "peakminer-production.up.railway.app",
@@ -153,11 +153,6 @@ CSRF_TRUSTED_ORIGINS = ["https://www.peakminersfx.com", "https://peakminersfx.co
 CSRF_COOKIE_SECURE = True
 # SESSION_COOKIE_SECURE = True
 # SECURE_SSL_REDIRECT = True
-
-# # HSTS SETTINGS
-# SECURE_HSTS_SECONDS = 3153600
-# SECURE_HSTS_PRELOAD = True
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 
 # CSRF_COOKIE_HTTPONLY = True
