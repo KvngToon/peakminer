@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-5ybqfw*thq_&as84hm&5s$&=$b#q2!hxk-0$bl8$932lt&$0@*"
+SECRET_KEY = "e3bc425af1a8cb66002b8e99ec962830ace89e4eda3221ae4234a2167f3860d9d1837f719f1b279f2734e20d9c063944444e"
 
 # DATABASE URL
 DATABASE_URL = config("DATABASE_URL")
@@ -155,9 +155,9 @@ SESSION_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True
 
 # # HSTS SETTINGS
-# SECURE_HSTS_SECONDS = 3153600
-# SECURE_HSTS_PRELOAD = True
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_SECONDS = 3153600
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 
 # CSRF_COOKIE_HTTPONLY = True
