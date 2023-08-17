@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure-5ybqfw*thq_&as84hm&5s$&=$b#q2!hxk-0$bl8$932lt&$0@*
 DATABASE_URL = config("DATABASE_URL")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -131,12 +131,12 @@ AUTH_USER_MODEL = "core.user"
 
 LOGIN_URL = "login"
 
-# # settings.py
+# settings.py
 
-# CSRF_TRUSTED_ORIGINS = ["https://www.peakminersfx.com", "https://peakminersfx.com"]
+
 CSRF_TRUSTED_ORIGINS = ["https://www.peakminersfx.com", "https://peakminersfx.com"]
 
-# CSRF_COOKIE_DOMAIN = "https://www.peakmineresfx.com"  # Note the dot before the domain
+CSRF_COOKIE_DOMAIN = "https://www.peakminersfx.com"  # Note the dot before the domain
 # # CSRF_COOKIE_PATH = "/"
 
 CSRF_COOKIE_SECURE = True
