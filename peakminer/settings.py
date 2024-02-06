@@ -27,8 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "e3bc425af1a8cb66002b8e99ec962830ace89e4eda3221ae4234a2167f3860d9d1837f719f1b279f2734e20d9c063944444e"
 
 # DATABASE URL
-# DATABASE_URL = config("DATABASE_URL")
-DATABASE_URL = "postgresql://postgres:EgAdFE2Eg1g6Bgb6254BBebf6Gcfc5b6@viaduct.proxy.rlwy.net:25690/railway"
+DATABASE_URL = config("DATABASE_URL")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
